@@ -36,19 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar:
-          AppBar(backgroundColor: Colors.transparent, elevation: 0, actions: [
-        IconButton(
-          icon: const Icon(
-            Icons.lock_outlined,
-            color: Colors.white,
-            size: 30,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.lock_outlined,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/journal');
+            },
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/journal');
-          },
-        ),
-      ]),
+        ],
+      ),
       body: GradientBackground(
         SafeArea(
           child: SingleChildScrollView(
@@ -95,15 +98,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        if (_counter < 3) {
-                          _counter++;
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(sendFail);
-                          _counter = 1;
-                        }
-                        print(_counter);
-                      });
+                      if (_counter < 3) {
+                        _counter++;
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(sendFail);
+                        _counter = 1;
+                      }
+                      print(_counter);
                     },
                     onLongPress: () {
                       if (controller.text.isNotEmpty) {
