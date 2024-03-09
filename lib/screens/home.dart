@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jotmob/widgets/gradient.dart';
 import 'package:intl/intl.dart';
 
@@ -11,6 +10,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _counter = 1;
+  SnackBar sendFail = const SnackBar(
+    duration: Duration(seconds: 1),
+    content: Text("Long press to save"),
+    backgroundColor: Colors.red,
+  );
+
+  SnackBar sendSuccess = const SnackBar(
+    duration: Duration(seconds: 1),
+    content: Text("Jot saved!"),
+    backgroundColor: Colors.green,
+  );
+
+  SnackBar emptyString = const SnackBar(
+    duration: Duration(seconds: 1),
+    content: Text("Can't jot empty entry"),
+    backgroundColor: Colors.red,
+  );
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
@@ -18,6 +35,20 @@ class _HomeScreenState extends State<HomeScreen> {
     TextEditingController controller = TextEditingController();
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar:
+          AppBar(backgroundColor: Colors.transparent, elevation: 0, actions: [
+        IconButton(
+          icon: const Icon(
+            Icons.lock_outlined,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/journal');
+          },
+        ),
+      ]),
       body: GradientBackground(
         SafeArea(
           child: SingleChildScrollView(
@@ -63,14 +94,30 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 16,
                   ),
                   ElevatedButton(
-                      onPressed: () {},
-                      onLongPress: () {
+                    onPressed: () {
+                      setState(() {
+                        if (_counter < 3) {
+                          _counter++;
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(sendFail);
+                          _counter = 1;
+                        }
+                        print(_counter);
+                      });
+                    },
+                    onLongPress: () {
+                      if (controller.text.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(sendSuccess);
                         controller.clear();
-                      },
-                      child: const Text(
-                        'Jot',
-                        style: TextStyle(color: Colors.black),
-                      ))
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(emptyString);
+                      }
+                    },
+                    child: const Text(
+                      'Jot',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  )
                 ],
               ),
             ),

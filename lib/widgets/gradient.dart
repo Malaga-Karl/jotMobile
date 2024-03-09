@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class GradientBackground extends StatelessWidget {
   const GradientBackground(this.widget, {super.key});
 
   GradientBackground.image({super.key})
-      : widget =
-            Image.asset('assets/images/jotlogo.png', width: 200, height: 200);
+      : widget = Animate(
+            delay: const Duration(seconds: 1),
+            effects: const [FadeEffect(), SlideEffect()],
+            child: Image.asset('assets/images/jotlogo.png',
+                width: 200, height: 200));
 
   final Widget widget;
 
