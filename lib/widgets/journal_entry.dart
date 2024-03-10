@@ -23,7 +23,7 @@ class JournalEntry extends StatelessWidget {
               children: [
                 Text(
                   time,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

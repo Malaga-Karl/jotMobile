@@ -2,7 +2,11 @@ class DummyEntry {
   var dummyEntry = {
     'May 8, 2021': [
       {'time': '2:24', 'entry': 'I am so happy'},
-      {'time': '2:56', 'entry': 'Jotting is my hobby'},
+      {
+        'time': '2:56',
+        'entry':
+            'Jotting is my hobby Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquam eros sed velit mollis, nec ullamcorper purus convallis. Cras ac mi nibh. Nullam tempus cursus lectus et vestibulum. Quisque a neque quis mi luctus ultrices. Integer pellentesque venenatis neque at dapibus. In hac habitasse platea dictumst. Nulla lacinia turpis vel augue sodales, non viverra ex ultricies.'
+      },
       {'time': '5:24', 'entry': 'Bananas!'},
       {'time': '5:50', 'entry': 'Apples and Oranges!!'},
     ],

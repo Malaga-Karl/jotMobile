@@ -34,40 +34,44 @@ class JournalScreen extends StatelessWidget {
         ),
       ),
       body: GradientBackground(
-        SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 40,
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: journalDates.length,
-                      reverse: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(
-                            journalDates[index],
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          subtitle: Text(
-                              '${journalEntries[journalDates[index]]?.length} Entries'),
-                          leading: const Icon(Icons.book),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.arrow_forward_ios),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/entries',
-                                  arguments: journalDates[index]);
-                            },
-                          ),
-                        );
-                      }),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 40,
                 ),
-              ),
-            ],
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) => const Divider(),
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: journalDates.length,
+                        reverse: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Text(
+                              journalDates[index],
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Text(
+                                '${journalEntries[journalDates[index]]?.length} Entries'),
+                            leading: const Icon(Icons.book),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.arrow_forward_ios),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/entries',
+                                    arguments: journalDates[index]);
+                              },
+                            ),
+                          );
+                        }),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

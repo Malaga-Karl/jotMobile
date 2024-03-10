@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     content: Text("Can't jot empty entry"),
     backgroundColor: Colors.red,
   );
+
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
@@ -104,7 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(sendFail);
                         _counter = 1;
                       }
-                      print(_counter);
                     },
                     onLongPress: () {
                       if (controller.text.isNotEmpty) {
