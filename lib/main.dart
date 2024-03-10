@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:jotmob/screens/entries.dart';
 import 'package:jotmob/screens/home.dart';
 import 'package:jotmob/screens/journal.dart';
@@ -7,9 +8,11 @@ import 'screens/splash.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory =
       await path_provider.getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
+  Hive.initFlutter(appDocumentDirectory.path);
+
   runApp(const MyApp());
 }
 

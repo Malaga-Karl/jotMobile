@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class JournalEntry extends StatelessWidget {
   const JournalEntry({super.key, required this.time, required this.entry});
@@ -8,6 +9,7 @@ class JournalEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var journalBox = Hive.box('journal');
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -28,13 +30,6 @@ class JournalEntry extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.edit_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
                     IconButton(
                       icon: const Icon(
                         Icons.delete_outline,

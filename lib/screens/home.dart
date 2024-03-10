@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:jotmob/widgets/gradient.dart';
 import 'package:intl/intl.dart';
+
+Future<void> initialize() async {
+  await Hive.openBox('journal');
+}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
     TextEditingController controller = TextEditingController();
+    initialize();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -108,6 +115,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     onLongPress: () {
                       if (controller.text.isNotEmpty) {
+                        if ((Hive.box('journal').keys.toList().isNotEmpty &&
+                                Hive.box('journal').keys.toList().last !=
+                                    formattedDate) ||
+                            Hive.box('journal').keys.toList().isEmpty) {
+                          Hive.box('journal').put(formattedDate, [
+                            {
+                              'time': '${now.hour}:${now.minute}',
+                              'entry': controller.text
+                            }
+                          ]);
+                        } else {
+                          Hive.box('journal').get(formattedDate).add({
+                            'time': '${now.hour}:${now.minute}',
+                            'entry': controller.text,
+                          });
+                        }
+                        print(Hive.box('journal').get(formattedDate));
                         ScaffoldMessenger.of(context).showSnackBar(sendSuccess);
                         controller.clear();
                       } else {
