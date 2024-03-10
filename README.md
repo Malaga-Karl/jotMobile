@@ -1,6 +1,6 @@
-# jotmob
+# JustJot Mobile
 
-A new Flutter project.
+A "Jot now, Forget later" journaling app (for friendless people)
 
 ## Getting Started
 
