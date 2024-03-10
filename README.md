@@ -6,9 +6,9 @@ A "Jot now, Forget later" journaling app
 ## Features
 ### Disappearing Text
 Ever want let something out of your system? Just type in the prompt and press the button and it goes away
-[https://github.com/Malaga-Karl/jotMobile/assets/116955232/e1a1cc6a-6ab4-44ec-adab-deca44f6c55e]
+![https://github.com/Malaga-Karl/jotMobile/assets/116955232/e1a1cc6a-6ab4-44ec-adab-deca44f6c55e]
 - long press to save so you have time to think about what you write 😉
-[https://github.com/Malaga-Karl/jotMobile/assets/116955232/b200315e-92a7-4aea-86b2-a0347413a392]
+![https://github.com/Malaga-Karl/jotMobile/assets/116955232/b200315e-92a7-4aea-86b2-a0347413a392]
 
 ### Journal Entries
 Since this is for mostly rants, you go to 2 screens before being able to read your entries
