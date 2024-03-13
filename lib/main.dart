@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:jotmob/screens/entries.dart';
-import 'package:jotmob/screens/home.dart';
-import 'package:jotmob/screens/journal.dart';
+import 'package:justjot/screens/entries.dart';
+import 'package:justjot/screens/home.dart';
+import 'package:justjot/screens/journal.dart';
 import 'screens/splash.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 

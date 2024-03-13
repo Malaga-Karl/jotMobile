@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:jotmob/widgets/gradient.dart';
+import 'package:justjot/widgets/gradient.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

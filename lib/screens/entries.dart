@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 // import 'package:jotmob/dummy_data/dummy_journal.dart';
-import 'package:jotmob/screens/journal.dart';
-import 'package:jotmob/widgets/gradient.dart';
-import 'package:jotmob/widgets/journal_entry.dart';
+import 'package:justjot/screens/journal.dart';
+import 'package:justjot/widgets/gradient.dart';
+import 'package:justjot/widgets/journal_entry.dart';
 
 class EntriesScreen extends StatefulWidget {
   const EntriesScreen({super.key});

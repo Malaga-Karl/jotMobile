@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:jotmob/widgets/gradient.dart';
+import 'package:justjot/widgets/gradient.dart';
 import 'package:intl/intl.dart';
 
 Future<void> initialize() async {
@@ -74,13 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text(
-                        'JustJot',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 35,
-                            fontFamily: 'Aclonica'),
-                      ),
+                      Image.asset('assets/images/wordlogo.png', width: 170,),
                       Text(
                         formattedDate,
                         style: const TextStyle(
