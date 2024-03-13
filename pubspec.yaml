@@ -41,6 +41,7 @@ dependencies:
   hive: ^2.2.3
   path_provider: ^2.1.2
   hive_flutter: ^1.1.0
+  outlined_text: ^1.0.1
   
 
 dev_dependencies:
