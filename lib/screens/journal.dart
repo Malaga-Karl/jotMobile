@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:jotmob/screens/home.dart';
 import 'package:jotmob/widgets/gradient.dart';
 // import 'package:jotmob/dummy_data/dummy_journal.dart';
 
@@ -51,6 +52,15 @@ class JournalBodyScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         // turn to sliver app bar
+        leading: BackButton(
+          onPressed: () {
+           Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+                maintainState: true),);
+          },
+        ),
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         elevation: 0,

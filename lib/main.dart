@@ -14,6 +14,9 @@ void main() async {
   Hive.initFlutter(appDocumentDirectory.path);
 
   runApp(const MyApp());
+   // Close the box when done
+  // Make sure to close the Hive instance too
+  await Hive.close();
 }
 
 class MyApp extends StatelessWidget {

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 class JournalEntry extends StatelessWidget {
-  const JournalEntry({super.key, required this.time, required this.entry});
+  const JournalEntry({super.key, required this.time, required this.entry, required this.date, required this.index, required this.callback});
 
+  final String date;
   final String time;
   final String entry;
+  final int index;
+  final VoidCallback callback;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,27 @@ class JournalEntry extends StatelessWidget {
                         Icons.delete_outline,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Delete Entry'),
+                          content: const Text('Are you sure you want to delete this entry?'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                callback();
+                              },
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                        ),
+                      
+                      ),
                     ),
                   ],
                 ),

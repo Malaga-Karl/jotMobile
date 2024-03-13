@@ -1,24 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:jotmob/dummy_data/dummy_journal.dart';
+// import 'package:jotmob/dummy_data/dummy_journal.dart';
+import 'package:jotmob/screens/journal.dart';
 import 'package:jotmob/widgets/gradient.dart';
 import 'package:jotmob/widgets/journal_entry.dart';
 
-class EntriesScreen extends StatelessWidget {
+class EntriesScreen extends StatefulWidget {
   const EntriesScreen({super.key});
+  
+  
+
+  @override
+  State<EntriesScreen> createState() => _EntriesScreenState();
+  
+}
+
+class _EntriesScreenState extends State<EntriesScreen> {
+
+  var journalBox = Hive.box('journal');
 
   @override
   Widget build(BuildContext context) {
     final String date = ModalRoute.of(context)!.settings.arguments as String;
     // var journal = DummyEntry();
     // var journalEntries = journal.dummyEntry;
-    final journalBox = Hive.box('journal');
+    
     var journalEntries = journalBox.get(date);
+    void deleteEntry(int index) async {
+      journalBox.get(date).removeAt(index);
+      journalBox.put(date, journalBox.get(date));
+      setState(() {
+        journalEntries = journalBox.get(date);
+      });
+      // print(journalEntries);
+    }
+    
 
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           //turn to sliver app bar
+          leading: BackButton(
+            onPressed: (){
+             Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const JournalScreen(),
+                  maintainState: false));
+            },
+          ),
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -54,11 +84,16 @@ class EntriesScreen extends StatelessWidget {
                             child: ListView.separated(
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: journalEntries.length,
+                                itemCount: journalEntries.length!,
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(height: 8),
                                 itemBuilder: (BuildContext context, int index) {
                                   return JournalEntry(
+                                      callback: () {
+                                        deleteEntry(index);
+                                      },
+                                      index: index,
+                                      date: date,
                                       time: journalEntries[index]['time'],
                                       entry: journalEntries[index]['entry']);
                                 }),

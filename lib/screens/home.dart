@@ -43,8 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
     initialize();
 
     return Scaffold(
+      
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -119,19 +121,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Hive.box('journal').keys.toList().last !=
                                     formattedDate) ||
                             Hive.box('journal').keys.toList().isEmpty) {
-                          Hive.box('journal').put(formattedDate, [
+                              setState(() {
+                                 Hive.box('journal').put(formattedDate, [
                             {
                               'time': '${now.hour}:${now.minute}',
                               'entry': controller.text
                             }
                           ]);
+                              });
+                         
                         } else {
-                          Hive.box('journal').get(formattedDate).add({
+                          setState(() {
+                             Hive.box('journal').get(formattedDate).add({
                             'time': '${now.hour}:${now.minute}',
                             'entry': controller.text,
                           });
+                            Hive.box('journal').put(formattedDate, Hive.box('journal').get(formattedDate));
+                          });
+                         
                         }
-                        print(Hive.box('journal').get(formattedDate));
+                        // print(Hive.box('journal').get(formattedDate));
                         ScaffoldMessenger.of(context).showSnackBar(sendSuccess);
                         controller.clear();
                       } else {
