@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:jotmob/dummy_data/dummy_journal.dart';
 import 'package:jotmob/widgets/gradient.dart';
 import 'package:jotmob/widgets/journal_entry.dart';
 
