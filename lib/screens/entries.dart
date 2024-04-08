@@ -7,46 +7,44 @@ import 'package:justjot/widgets/journal_entry.dart';
 
 class EntriesScreen extends StatefulWidget {
   const EntriesScreen({super.key});
-  
-  
 
   @override
   State<EntriesScreen> createState() => _EntriesScreenState();
-  
 }
 
 class _EntriesScreenState extends State<EntriesScreen> {
-
   var journalBox = Hive.box('journal');
 
   @override
   Widget build(BuildContext context) {
-    final String date = ModalRoute.of(context)!.settings.arguments as String;
+    final int journal_index = ModalRoute.of(context)!.settings.arguments as int;
+
     // var journal = DummyEntry();
     // var journalEntries = journal.dummyEntry;
-    
-    var journalEntries = journalBox.get(date);
+
+    var journalEntries = journalBox.get(journal_index);
+    var journalDate = journalEntries.keys.toList()[0];
+
     void deleteEntry(int index) async {
-      journalBox.get(date).removeAt(index);
-      journalBox.put(date, journalBox.get(date));
+      journalBox.get(journal_index).removeAt(index);
+      journalBox.put(journal_index, journalBox.get(journal_index));
       setState(() {
-        journalEntries = journalBox.get(date);
+        journalEntries = journalBox.get(journal_index);
       });
       // print(journalEntries);
     }
-    
 
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           //turn to sliver app bar
           leading: BackButton(
-            onPressed: (){
-             Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const JournalScreen(),
-                  maintainState: false));
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const JournalScreen(),
+                      maintainState: false));
             },
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -70,7 +68,7 @@ class _EntriesScreenState extends State<EntriesScreen> {
                           height: 32,
                         ),
                         Text(
-                          date,
+                          journalDate.toString(),
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -84,7 +82,7 @@ class _EntriesScreenState extends State<EntriesScreen> {
                             child: ListView.separated(
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: journalEntries.length!,
+                                itemCount: journalEntries[journalDate].length!,
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(height: 8),
                                 itemBuilder: (BuildContext context, int index) {
@@ -93,9 +91,15 @@ class _EntriesScreenState extends State<EntriesScreen> {
                                         deleteEntry(index);
                                       },
                                       index: index,
-                                      date: date,
-                                      time: journalEntries[index]['time'],
-                                      entry: journalEntries[index]['entry']);
+                                      date: journalDate.toString(),
+                                      time: Hive.box('journal')
+                                              .values
+                                              .toList()[journal_index]
+                                          [journalDate][index]['time'],
+                                      entry: Hive.box('journal')
+                                              .values
+                                              .toList()[journal_index]
+                                          [journalDate][index]['entry']);
                                 }),
                           ),
                         ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:justjot/widgets/gradient.dart';
-import 'package:intl/intl.dart';
 
 Future<void> initialize() async {
   await Hive.openBox('journal');
@@ -38,12 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
+    // String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
+    String formattedDate = "Cryce 20, 2021";
     TextEditingController controller = TextEditingController();
     initialize();
 
     return Scaffold(
-      
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -74,7 +73,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Image.asset('assets/images/wordlogo.png', width: 170,),
+                      Image.asset(
+                        'assets/images/wordlogo.png',
+                        width: 170,
+                      ),
                       Text(
                         formattedDate,
                         style: const TextStyle(
@@ -102,6 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      print(Hive.box('journal').values.toList()[1]
+                          ['Aryce 20, 2021'][0]['time']);
                       if (_counter < 3) {
                         _counter++;
                       } else {
@@ -110,29 +114,41 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                     onLongPress: () {
+                      var index = Hive.box('journal').keys.toList().isNotEmpty
+                          ? Hive.box('journal').keys.toList().length
+                          : 0;
+                      // var index = 1;
+                      Hive.openBox('journal');
                       if (controller.text.isNotEmpty) {
                         if ((Hive.box('journal').keys.toList().isNotEmpty &&
-                                Hive.box('journal').keys.toList().last !=
+                                Hive.box('journal')
+                                        .values
+                                        .last
+                                        .keys
+                                        .toList()[0] !=
                                     formattedDate) ||
                             Hive.box('journal').keys.toList().isEmpty) {
-                              setState(() {
-                                 Hive.box('journal').put(formattedDate, [
-                            {
-                              'time': '${now.hour}:${now.minute}',
-                              'entry': controller.text
-                            }
-                          ]);
-                              });
-                         
+                          setState(() {
+                            Hive.box('journal').put(index, {
+                              formattedDate: [
+                                {
+                                  'time': '${now.hour}:${now.minute}',
+                                  'entry': controller.text
+                                }
+                              ]
+                            });
+                          });
                         } else {
                           setState(() {
-                             Hive.box('journal').get(formattedDate).add({
-                            'time': '${now.hour}:${now.minute}',
-                            'entry': controller.text,
+                            Hive.box('journal')
+                                .get(index - 1)[formattedDate]
+                                .add({
+                              'time': '${now.hour}:${now.minute}',
+                              'entry': controller.text,
+                            });
+                            Hive.box('journal').put(
+                                index - 1, Hive.box('journal').get(index - 1));
                           });
-                            Hive.box('journal').put(formattedDate, Hive.box('journal').get(formattedDate));
-                          });
-                         
                         }
                         // print(Hive.box('journal').get(formattedDate));
                         ScaffoldMessenger.of(context).showSnackBar(sendSuccess);

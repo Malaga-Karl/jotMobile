@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 class JournalEntry extends StatelessWidget {
-  const JournalEntry({super.key, required this.time, required this.entry, required this.date, required this.index, required this.callback});
+  const JournalEntry(
+      {super.key,
+      required this.time,
+      required this.entry,
+      required this.date,
+      required this.index,
+      required this.callback});
 
   final String date;
   final String time;
@@ -42,7 +48,8 @@ class JournalEntry extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
                           title: const Text('Delete Entry'),
-                          content: const Text('Are you sure you want to delete this entry?'),
+                          content: const Text(
+                              'Are you sure you want to delete this entry?'),
                           actions: <Widget>[
                             TextButton(
                               onPressed: () => Navigator.pop(context),
@@ -57,7 +64,6 @@ class JournalEntry extends StatelessWidget {
                             ),
                           ],
                         ),
-                      
                       ),
                     ),
                   ],
