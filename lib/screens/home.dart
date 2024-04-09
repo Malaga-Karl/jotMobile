@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     // String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
-    String formattedDate = "Cryce 20, 2021";
+    String formattedDate = "February 20, 2021";
     TextEditingController controller = TextEditingController();
     initialize();
 
@@ -75,12 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Image.asset(
                         'assets/images/wordlogo.png',
-                        width: 170,
+                        width: 150,
                       ),
                       Text(
                         formattedDate,
                         style: const TextStyle(
                             color: Colors.white, fontFamily: 'Aclonica'),
+                        softWrap: true,
                       ),
                     ],
                   ),
@@ -104,8 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print(Hive.box('journal').values.toList()[1]
-                          ['Aryce 20, 2021'][0]['time']);
+                      print(Hive.box('journal').get(1));
                       if (_counter < 3) {
                         _counter++;
                       } else {

@@ -26,11 +26,17 @@ class _EntriesScreenState extends State<EntriesScreen> {
     var journalDate = journalEntries.keys.toList()[0];
 
     void deleteEntry(int index) async {
-      journalBox.get(journal_index).removeAt(index);
-      journalBox.put(journal_index, journalBox.get(journal_index));
-      setState(() {
-        journalEntries = journalBox.get(journal_index);
-      });
+      if (journalEntries[journalDate].length == 1) {
+        journalBox.deleteAt(journal_index);
+        Navigator.pushReplacementNamed(context, '/journal');
+      } else {
+        journalBox.get(journal_index)[journalDate].removeAt(index);
+        journalBox.put(journal_index, journalBox.get(journal_index));
+        setState(() {
+          journalEntries = journalBox.get(journal_index);
+        });
+      }
+
       // print(journalEntries);
     }
 

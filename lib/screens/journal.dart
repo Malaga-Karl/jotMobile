@@ -125,12 +125,6 @@ class JournalBodyScreen extends StatelessWidget {
                               }),
                         ),
                       ),
-                      TextButton(
-                        child: Text('Migrate'),
-                        onPressed: () async {
-                          print(journalBox.values);
-                        },
-                      )
                     ],
                   )
                 : const Center(
