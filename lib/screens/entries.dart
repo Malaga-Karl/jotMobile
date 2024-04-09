@@ -14,6 +14,7 @@ class EntriesScreen extends StatefulWidget {
 
 class _EntriesScreenState extends State<EntriesScreen> {
   var journalBox = Hive.box('journal');
+  bool isReverse = false;
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +75,24 @@ class _EntriesScreenState extends State<EntriesScreen> {
                         const SizedBox(
                           height: 32,
                         ),
-                        Text(
-                          journalDate.toString(),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Aclonica'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              journalDate.toString(),
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Aclonica'),
+                            ),
+                            Switch(
+                                value: isReverse,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isReverse = value;
+                                  });
+                                }),
+                          ],
                         ),
                         const SizedBox(
                           height: 16,
@@ -88,6 +101,7 @@ class _EntriesScreenState extends State<EntriesScreen> {
                           child: SingleChildScrollView(
                             child: ListView.separated(
                                 physics: const BouncingScrollPhysics(),
+                                reverse: isReverse,
                                 shrinkWrap: true,
                                 itemCount: journalEntries[journalDate].length!,
                                 separatorBuilder: (context, index) =>

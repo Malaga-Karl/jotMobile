@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:intl/intl.dart';
 import 'package:justjot/widgets/gradient.dart';
 
 Future<void> initialize() async {
@@ -37,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    // String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
-    String formattedDate = "February 20, 2021";
+    String formattedTime = DateFormat('hh:mm').format(now);
+    String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
     TextEditingController controller = TextEditingController();
     initialize();
 
@@ -132,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Hive.box('journal').put(index, {
                               formattedDate: [
                                 {
-                                  'time': '${now.hour}:${now.minute}',
+                                  'time': formattedTime,
                                   'entry': controller.text
                                 }
                               ]
