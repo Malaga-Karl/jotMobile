@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String formattedTime = DateFormat('hh:mm').format(now);
+    String formattedTime = DateFormat('HH:mm').format(now);
     String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
     TextEditingController controller = TextEditingController();
     initialize();
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print(Hive.box('journal').get(1));
+                      print(formattedTime);
                       if (_counter < 3) {
                         _counter++;
                       } else {
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Hive.box('journal').put(index, {
                               formattedDate: [
                                 {
-                                  'time': formattedTime,
+                                  'time': formattedTime.toString(),
                                   'entry': controller.text
                                 }
                               ]
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Hive.box('journal')
                                 .get(index - 1)[formattedDate]
                                 .add({
-                              'time': '${now.hour}:${now.minute}',
+                              'time': formattedTime.toString(),
                               'entry': controller.text,
                             });
                             Hive.box('journal').put(
