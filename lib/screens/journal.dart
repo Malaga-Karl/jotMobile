@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:justjot/screens/home.dart';
@@ -54,11 +56,11 @@ class JournalBodyScreen extends StatelessWidget {
         // turn to sliver app bar
         leading: BackButton(
           onPressed: () {
-           Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(),
-                maintainState: true),);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeScreen(), maintainState: true),
+            );
           },
         ),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -97,23 +99,26 @@ class JournalBodyScreen extends StatelessWidget {
                                   const Divider(),
                               physics: const BouncingScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: journalBox.length,
                               reverse: true,
+                              itemCount: journalBox.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return ListTile(
                                   title: Text(
-                                    journalBox.keys.toList()[index],
+                                    journalBox.values
+                                        .toList()[index]
+                                        .keys
+                                        .toList()[0]
+                                        .toString(),
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                   subtitle: Text(
-                                      '${journalBox.get(journalBox.keys.toList()[index]).length} Entries'),
+                                      '${journalBox.values.toList()[index][journalBox.values.toList()[index].keys.toList()[0]].length} Entries'),
                                   leading: const Icon(Icons.book),
                                   trailing: IconButton(
                                     icon: const Icon(Icons.arrow_forward_ios),
                                     onPressed: () {
                                       Navigator.pushNamed(context, '/entries',
-                                          arguments:
-                                              journalBox.keys.toList()[index]);
+                                          arguments: index);
                                     },
                                   ),
                                 );

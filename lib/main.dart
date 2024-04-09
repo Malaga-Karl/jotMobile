@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:justjot/screens/entries.dart';
 import 'package:justjot/screens/home.dart';
@@ -14,7 +13,7 @@ void main() async {
   Hive.initFlutter(appDocumentDirectory.path);
 
   runApp(const MyApp());
-   // Close the box when done
+  // Close the box when done
   // Make sure to close the Hive instance too
   await Hive.close();
 }

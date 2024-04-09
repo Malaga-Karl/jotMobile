@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "696770429461",
+    "project_id": "justjot-7e48a",
+    "storage_bucket": "justjot-7e48a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696770429461:android:0dc881ad4b0f0a9266441c",
+        "android_client_info": {
+          "package_name": "com.example.jotmob"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1aglvpaJfnZKXjX-wKnMXtF7cPBP64uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
