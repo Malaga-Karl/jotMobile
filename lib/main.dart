@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:justjot/screens/backup.dart';
 import 'package:justjot/screens/entries.dart';
 import 'package:justjot/screens/home.dart';
 import 'package:justjot/screens/journal.dart';
+import 'package:justjot/screens/login.dart';
 import 'screens/splash.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/journal': (context) => const JournalScreen(),
         '/entries': (context) => const EntriesScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/backup': (context) => const BackupScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

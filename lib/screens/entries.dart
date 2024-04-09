@@ -58,6 +58,20 @@ class _EntriesScreenState extends State<EntriesScreen> {
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  icon: const Icon(
+                    Icons.backup_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  )),
+            )
+          ],
           title: const Text(
             'Entries',
             style: TextStyle(
@@ -86,6 +100,7 @@ class _EntriesScreenState extends State<EntriesScreen> {
                                   fontFamily: 'Aclonica'),
                             ),
                             Switch(
+                                activeColor: Colors.grey,
                                 value: isReverse,
                                 onChanged: (value) {
                                   setState(() {
