@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+<<<<<<< HEAD
 // import 'package:jotmob/dummy_data/dummy_journal.dart';
 import 'package:justjot/screens/journal.dart';
 import 'package:justjot/widgets/gradient.dart';
 import 'package:justjot/widgets/journal_entry.dart';
+=======
+import 'package:jotmob/widgets/gradient.dart';
+import 'package:jotmob/widgets/journal_entry.dart';
+>>>>>>> 34590835b0c1a0fc7a3aae07cff01c651a0ba9bf
 
 class EntriesScreen extends StatefulWidget {
   const EntriesScreen({super.key});
