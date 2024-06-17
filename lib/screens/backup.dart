@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:justjot/screens/journal.dart';
 import 'package:justjot/widgets/gradient.dart';
 
 class BackupScreen extends StatelessWidget {

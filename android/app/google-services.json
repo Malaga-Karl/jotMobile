@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "696770429461",
-    "project_id": "justjot-7e48a",
-    "storage_bucket": "justjot-7e48a.appspot.com"
+    "project_number": "986333030007",
+    "project_id": "justjot-9a3dc",
+    "storage_bucket": "justjot-9a3dc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:696770429461:android:0dc881ad4b0f0a9266441c",
+        "mobilesdk_app_id": "1:986333030007:android:14cba0fc7a904df5cd8872",
         "android_client_info": {
-          "package_name": "com.example.jotmob"
+          "package_name": "com.android.justjot"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC1aglvpaJfnZKXjX-wKnMXtF7cPBP64uo"
+          "current_key": "AIzaSyDdyZhyQWmvnN1YAg8LJf1p7XNpAuZqeS0"
         }
       ],
       "services": {

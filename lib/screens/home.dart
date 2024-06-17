@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime now = DateTime.now();
     String formattedTime = DateFormat('HH:mm').format(now);
     String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
+    // String formattedDate = "June 18, 2024";
     TextEditingController controller = TextEditingController();
     initialize();
 
@@ -106,13 +107,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print(formattedTime);
-                      if (_counter < 3) {
-                        _counter++;
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(sendFail);
-                        _counter = 1;
-                      }
+                      // print(formattedTime);
+                      // if (_counter < 3) {
+                      //   _counter++;
+                      // } else {
+                      //   ScaffoldMessenger.of(context).showSnackBar(sendFail);
+                      //   _counter = 1;
+                      // }
+                      Hive.box('journal').clear();
                     },
                     onLongPress: () {
                       var index = Hive.box('journal').keys.toList().isNotEmpty

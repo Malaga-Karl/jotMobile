@@ -75,9 +75,9 @@ class JournalBodyScreen extends StatelessWidget {
             ),
             IconButton(
               iconSize: 30,
-              icon: const Icon(Icons.lock_open_outlined),
+              icon: const Icon(Icons.backup_outlined),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/login');
               },
               color: Colors.white,
             )

@@ -10,19 +10,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user;
-
-  @override
-  void initState() {
-    super.initState();
-    _auth.authStateChanges().listen((event) {
-      setState(() {
-        _user = event;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 40,
                 ),
                 const Text(
-                  "You must be logged in to backup or restore",
+                  "Backup sa GDrive coming soon",
                   style: TextStyle(color: Colors.white, fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
@@ -67,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 10,
                       ),
                       Text(
-                        "Sign in with Google",
+                        "not working yet",
                         style: TextStyle(color: Colors.black),
                       ),
                     ],

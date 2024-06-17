@@ -126,6 +126,10 @@ class _EntriesScreenState extends State<EntriesScreen> {
                                       callback: () {
                                         deleteEntry(index);
                                       },
+                                      journ_index: journal_index,
+                                      // edit: () {
+                                      //   editEntry(index);
+                                      // },
                                       index: index,
                                       date: journalDate.toString(),
                                       time: Hive.box('journal')
