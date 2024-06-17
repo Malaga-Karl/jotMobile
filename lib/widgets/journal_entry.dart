@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import '../screens/edit.dart';
+
 class JournalEntry extends StatelessWidget {
   const JournalEntry(
       {super.key,
       required this.time,
+      required this.journ_index,
       required this.entry,
       required this.date,
       required this.index,
@@ -15,6 +18,7 @@ class JournalEntry extends StatelessWidget {
   final String entry;
   final int index;
   final VoidCallback callback;
+  final int journ_index;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,22 @@ class JournalEntry extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    IconButton(
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          // edit();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditScreen(
+                                    index: index,
+                                    date: date,
+                                    journ_index: journ_index)),
+                          );
+                        }),
                     IconButton(
                       icon: const Icon(
                         Icons.delete_outline,

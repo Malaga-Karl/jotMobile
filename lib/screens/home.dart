@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:intl/intl.dart';
 import 'package:justjot/widgets/gradient.dart';
 
 Future<void> initialize() async {
@@ -37,8 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    // String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
-    String formattedDate = "February 20, 2021";
+    String formattedTime = DateFormat('HH:mm').format(now);
+    String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
+    // String formattedDate = "June 18, 2024";
     TextEditingController controller = TextEditingController();
     initialize();
 
@@ -105,13 +107,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print(Hive.box('journal').get(1));
-                      if (_counter < 3) {
-                        _counter++;
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(sendFail);
-                        _counter = 1;
-                      }
+                      // print(formattedTime);
+                      // if (_counter < 3) {
+                      //   _counter++;
+                      // } else {
+                      //   ScaffoldMessenger.of(context).showSnackBar(sendFail);
+                      //   _counter = 1;
+                      // }
+                      Hive.box('journal').clear();
                     },
                     onLongPress: () {
                       var index = Hive.box('journal').keys.toList().isNotEmpty
@@ -132,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Hive.box('journal').put(index, {
                               formattedDate: [
                                 {
-                                  'time': '${now.hour}:${now.minute}',
+                                  'time': formattedTime.toString(),
                                   'entry': controller.text
                                 }
                               ]
@@ -143,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Hive.box('journal')
                                 .get(index - 1)[formattedDate]
                                 .add({
-                              'time': '${now.hour}:${now.minute}',
+                              'time': formattedTime.toString(),
                               'entry': controller.text,
                             });
                             Hive.box('journal').put(

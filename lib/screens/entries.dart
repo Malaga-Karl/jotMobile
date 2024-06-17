@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-// import 'package:jotmob/dummy_data/dummy_journal.dart';
+// import 'package:justjot/dummy_data/dummy_journal.dart';
 import 'package:justjot/screens/journal.dart';
 import 'package:justjot/widgets/gradient.dart';
 import 'package:justjot/widgets/journal_entry.dart';
@@ -14,9 +14,11 @@ class EntriesScreen extends StatefulWidget {
 
 class _EntriesScreenState extends State<EntriesScreen> {
   var journalBox = Hive.box('journal');
+  bool isReverse = false;
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
     final int journal_index = ModalRoute.of(context)!.settings.arguments as int;
 
     // var journal = DummyEntry();
@@ -56,6 +58,20 @@ class _EntriesScreenState extends State<EntriesScreen> {
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  icon: const Icon(
+                    Icons.backup_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  )),
+            )
+          ],
           title: const Text(
             'Entries',
             style: TextStyle(
@@ -73,12 +89,25 @@ class _EntriesScreenState extends State<EntriesScreen> {
                         const SizedBox(
                           height: 32,
                         ),
-                        Text(
-                          journalDate.toString(),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Aclonica'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              journalDate.toString(),
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Aclonica'),
+                            ),
+                            Switch(
+                                activeColor: Colors.grey,
+                                value: isReverse,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isReverse = value;
+                                  });
+                                }),
+                          ],
                         ),
                         const SizedBox(
                           height: 16,
@@ -87,6 +116,7 @@ class _EntriesScreenState extends State<EntriesScreen> {
                           child: SingleChildScrollView(
                             child: ListView.separated(
                                 physics: const BouncingScrollPhysics(),
+                                reverse: isReverse,
                                 shrinkWrap: true,
                                 itemCount: journalEntries[journalDate].length!,
                                 separatorBuilder: (context, index) =>
@@ -96,6 +126,10 @@ class _EntriesScreenState extends State<EntriesScreen> {
                                       callback: () {
                                         deleteEntry(index);
                                       },
+                                      journ_index: journal_index,
+                                      // edit: () {
+                                      //   editEntry(index);
+                                      // },
                                       index: index,
                                       date: journalDate.toString(),
                                       time: Hive.box('journal')

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:justjot/screens/home.dart';
@@ -59,25 +57,29 @@ class JournalBodyScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => HomeScreen(), maintainState: true),
+                  builder: (context) => const HomeScreen(),
+                  maintainState: true),
             );
           },
         ),
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Journal',
               style: TextStyle(
                   color: Colors.white, fontFamily: 'Aclonica', fontSize: 30.0),
             ),
-            Icon(
-              Icons.lock_open_outlined,
+            IconButton(
+              iconSize: 30,
+              icon: const Icon(Icons.backup_outlined),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/login');
+              },
               color: Colors.white,
-              size: 30,
             )
           ],
         ),
