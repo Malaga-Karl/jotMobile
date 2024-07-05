@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 import '../screens/edit.dart';
 
@@ -22,7 +21,6 @@ class JournalEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var journalBox = Hive.box('journal');
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
