@@ -4,6 +4,7 @@ import 'package:justjot/screens/backup.dart';
 import 'package:justjot/screens/entries.dart';
 import 'package:justjot/screens/home.dart';
 import 'package:justjot/screens/journal.dart';
+import 'screens/settings.dart';
 import 'screens/splash.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/journal': (context) => const JournalScreen(),
         '/entries': (context) => const EntriesScreen(),
         '/backup': (context) => const BackupScreen(),
+        '/settings': (context) => const SettingsScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
