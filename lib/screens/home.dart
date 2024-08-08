@@ -107,14 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // print(formattedTime);
-                      // if (_counter < 3) {
-                      //   _counter++;
-                      // } else {
-                      //   ScaffoldMessenger.of(context).showSnackBar(sendFail);
-                      //   _counter = 1;
-                      // }
-                      Hive.box('journal').clear();
+                      print(formattedTime);
+                      if (_counter < 3) {
+                        _counter++;
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(sendFail);
+                        _counter = 1;
+                      }
                     },
                     onLongPress: () {
                       var index = Hive.box('journal').keys.toList().isNotEmpty
